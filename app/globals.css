@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,500&family=Space+Grotesk:wght@500&display=swap');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.scoreboard {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  width: 100vw;
+  padding: 0 20px;
+}
+
+.header {
+  font-family: 'Kanit', sans-serif;
+  margin: 20px;
+  font-weight: medium;
+  font-style: italic;
+  font-size: clamp(20px, 4vw, 60px);
+}
+
+.title {
+  font-family: 'Kanit', sans-serif;
+  margin: 20px;
+  font-weight: medium;
+  font-style: italic;
+  font-size: clamp(20px, 3vw, 30px);
+}
+
+.teamAndScore {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d8dade;
+  border-radius: 6px;
+  padding: 20px;
+  width: 300px;
+  max-width: 300px;
+  /* height: 140px; */
+}
+
+.teamContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.gameTime {
+  font-size: 12px;
+}
+
+.border1 {
+  border: 1px solid black;
+}
