@@ -1,5 +1,3 @@
-import React from "react";
-
 export function whoWon(homeScore, visitorScore, gameStatus) {
   if (gameStatus !== "Final") return;
 

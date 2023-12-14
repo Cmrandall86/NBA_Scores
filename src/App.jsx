@@ -13,14 +13,17 @@ function App() {
   const { data } = useFetchNBAData(formattedGameDay);
   return (
     <>
-    <div>
-      <div className="flex justify-between items-center m-3 mb-5 border-b-2 border-black-100">
+    <div className="flex justify-center w-screen border-green-700">
+      <div className="max-w-screen-lg">
+      <div className="flex justify-between items-center m-3 mb-5 border-b-2 ">
         <Header />
         <Date_Picker setGameDay={setGameDay} gameDay={gameDay} />
         
       </div>
       <div className="flex items-center justify-center flex-col gap-10">
         <ScoreDisplayer games={data} />
+      </div>
+
       </div>
 
     </div>
