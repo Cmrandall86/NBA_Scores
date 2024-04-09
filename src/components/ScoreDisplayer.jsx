@@ -1,4 +1,5 @@
 import React from "react";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { Link } from "react-router-dom";
 import { whoWon, Score } from "./ui/CheckWinner";
@@ -66,56 +67,53 @@ const NBAIcons = {
   WAS,
 };
 
-export default function ScoreDisplayer({ games }) {
+export default function ScoreDisplayer({ games, loading }) {
   const inProgress = ["1st Qtr", "2nd Qtr", "Halftime", "3rd Qtr", "4th Qtr"];
   return (
-    <div className="scoreboard">
-      {games.length === 0 && <h2 className="title">No Games Today</h2>}
-      {games.some((game) => game.status !== inProgress.includes(game.status)) &&
-        games.some((game) => game.status !== "Final") && <h2 className="title">Upcoming</h2>}
-      <div className="flex flex-wrap gap-5">
-        {games.map((game) => {
-          {
-            if (!inProgress.includes(game.status) && game.status !== "Final") {
-              return (
-                <div>
-                  <GameResult game={game} />
-                </div>
-              );
-            }
-          }
-        })}
-      </div>
-      {games.some((game) => inProgress.includes(game.status)) && <h2 className="title">In Progress</h2>}
-      <div className="flex flex-wrap gap-5">
-        {games.map((game) => {
-          {
-            if (inProgress.includes(game.status)) {
-              return (
-                <div>
-                  <GameResult game={game} />
-                </div>
-              );
-            }
-          }
-        })}
-      </div>
-      {games.some((game) => game.status === "Final") && <h2 className="title">Final</h2>}
+    <>
+    {loading ? (
+      <div><CircularProgress /></div>
+    ) : (
+        <div className="scoreboard">
+        <div>
+          {games.length === 0 && <h2 className="title">No Games Today</h2>}
+          {games.some((game) => game.status !== inProgress.includes(game.status)) && games.some((game) => game.status !== "Final") && (
+            <h2 className="title">Upcoming</h2>
+          )}
+          <div className="flex flex-wrap gap-5">
+            {games.map((game, i) => {
+              {
+                if (!inProgress.includes(game.status) && game.status !== "Final") {
+                  return <GameResult game={game} key={i} />;
+                }
+              }
+            })}
+          </div>
+          {games.some((game) => inProgress.includes(game.status)) && <h2 className="title">In Progress</h2>}
+          <div className="flex flex-wrap gap-5">
+            {games.map((game) => {
+              {
+                if (inProgress.includes(game.status)) {
+                  return <GameResult game={game} />;
+                }
+              }
+            })}
+          </div>
+          {games.some((game) => game.status === "Final") && <h2 className="title">Final</h2>}
 
-      <div className="flex flex-wrap gap-5">
-        {games.map((game) => {
-          {
-            if (game.status === "Final") {
-              return (
-                <div>
-                  <GameResult game={game} />
-                </div>
-              );
-            }
-          }
-        })}
-      </div>
+          <div className="flex flex-wrap gap-5">
+            {games.map((game) => {
+              {
+                if (game.status === "Final") {
+                  return <GameResult game={game} />;
+                }
+              }
+            })}
+          </div>
+        </div>
     </div>
+      )}
+    </>
   );
 }
 
@@ -158,14 +156,7 @@ const GameResult = ({ game }) => {
 };
 
 function FormatGameStatus({ status }) {
-  if (
-    status === "Final" ||
-    status === "1st Qtr" ||
-    status === "2nd Qtr" ||
-    status === "Halftime" ||
-    status === "3rd Qtr" ||
-    status === "4th Qtr"
-  ) {
+  if (status === "Final" || status === "1st Qtr" || status === "2nd Qtr" || status === "Halftime" || status === "3rd Qtr" || status === "4th Qtr") {
     return (
       <div className="flex justify-end">
         <span className="gameTime">{status}</span>
